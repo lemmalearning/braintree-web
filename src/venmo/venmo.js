@@ -7,9 +7,7 @@ var errors = require('./shared/errors');
 var querystring = require('../lib/querystring');
 var methods = require('../lib/methods');
 var convertMethodsToError = require('../lib/convert-methods-to-error');
-var wrapPromise = require('@braintree/wrap-promise');
 var BraintreeError = require('../lib/braintree-error');
-var Promise = require('../lib/promise');
 var VERSION = process.env.npm_package_version;
 
 /**
@@ -274,4 +272,4 @@ function documentVisibilityChangeEventName() {
   return visibilityChange;
 }
 
-module.exports = wrapPromise.wrapPrototype(Venmo);
+module.exports = Venmo;

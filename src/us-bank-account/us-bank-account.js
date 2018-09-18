@@ -9,8 +9,6 @@ var once = require('../lib/once');
 var convertMethodsToError = require('../lib/convert-methods-to-error');
 var methods = require('../lib/methods');
 var camelCaseToSnakeCase = require('../lib/camel-case-to-snake-case');
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @typedef {object} USBankAccount~tokenizePayload
@@ -420,4 +418,4 @@ USBankAccount.prototype.teardown = function () {
   return Promise.resolve();
 };
 
-module.exports = wrapPromise.wrapPrototype(USBankAccount);
+module.exports = USBankAccount;

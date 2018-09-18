@@ -1,6 +1,5 @@
 'use strict';
 
-var Promise = require('../../lib/promise');
 var frameService = require('../../lib/frame-service/external');
 var BraintreeError = require('../../lib/braintree-error');
 var convertToBraintreeError = require('../../lib/convert-to-braintree-error');
@@ -8,7 +7,6 @@ var errors = require('../shared/errors');
 var VERSION = process.env.npm_package_version;
 var INTEGRATION_TIMEOUT_MS = require('../../lib/constants').INTEGRATION_TIMEOUT_MS;
 var methods = require('../../lib/methods');
-var wrapPromise = require('@braintree/wrap-promise');
 var convertMethodsToError = require('../../lib/convert-methods-to-error');
 var analytics = require('../../lib/analytics');
 var useMin = require('../../lib/use-min');
@@ -127,7 +125,7 @@ Ideal.prototype._initialize = function () {
  * });
  * @returns {Promise|void}
  */
-Ideal.prototype.startPayment = wrapPromise(function (options) {
+Ideal.prototype.startPayment = function (options) {
   var self = this; // eslint-disable-line no-invalid-this
 
   return new Promise(function (resolve, reject) {
@@ -156,7 +154,7 @@ Ideal.prototype.startPayment = wrapPromise(function (options) {
       }
     }, self._startPaymentCallback);
   });
-});
+}
 
 /**
  * Closes the iDEAL window if it is open.
@@ -349,7 +347,7 @@ function hasMissingOption(options) {
  * @param {callback} [callback] Called once teardown is complete. No data is returned if teardown completes successfully.
  * @returns {Promise|void} If no callback is provided, returns a promise.
  */
-Ideal.prototype.teardown = wrapPromise(function () {
+Ideal.prototype.teardown = function () {
   var self = this; // eslint-disable-line no-invalid-this
 
   self._frameService.teardown();
@@ -359,6 +357,6 @@ Ideal.prototype.teardown = wrapPromise(function () {
   analytics.sendEvent(self._client, 'ideal.teardown-completed');
 
   return Promise.resolve();
-});
+}
 
 module.exports = Ideal;

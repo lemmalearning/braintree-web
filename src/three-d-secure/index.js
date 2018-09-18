@@ -8,8 +8,6 @@ var BraintreeError = require('../lib/braintree-error');
 var analytics = require('../lib/analytics');
 var errors = require('./shared/errors');
 var VERSION = process.env.npm_package_version;
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @static
@@ -52,7 +50,7 @@ function create(options) {
 }
 
 module.exports = {
-  create: wrapPromise(create),
+  create: create,
   /**
    * @description The current version of the SDK, i.e. `{@pkg version}`.
    * @type {string}

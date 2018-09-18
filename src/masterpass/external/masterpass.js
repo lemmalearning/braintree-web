@@ -1,12 +1,10 @@
 'use strict';
 
-var Promise = require('../../lib/promise');
 var frameService = require('../../lib/frame-service/external');
 var BraintreeError = require('../../lib/braintree-error');
 var errors = require('../shared/errors');
 var VERSION = process.env.npm_package_version;
 var methods = require('../../lib/methods');
-var wrapPromise = require('@braintree/wrap-promise');
 var analytics = require('../../lib/analytics');
 var convertMethodsToError = require('../../lib/convert-methods-to-error');
 var convertToBraintreeError = require('../../lib/convert-to-braintree-error');
@@ -387,4 +385,4 @@ function hasMissingOption(options) {
   return false;
 }
 
-module.exports = wrapPromise.wrapPrototype(Masterpass);
+module.exports = Masterpass;

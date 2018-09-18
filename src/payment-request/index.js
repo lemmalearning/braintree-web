@@ -8,7 +8,6 @@
 
 var PaymentRequestComponent = require('./external/payment-request');
 var basicComponentVerification = require('../lib/basic-component-verification');
-var wrapPromise = require('@braintree/wrap-promise');
 var VERSION = process.env.npm_package_version;
 
 /**
@@ -51,7 +50,7 @@ function create(options) {
 }
 
 module.exports = {
-  create: wrapPromise(create),
+  create: create,
   /**
    * @description The current version of the SDK, i.e. `{@pkg version}`.
    * @type {string}

@@ -5,9 +5,7 @@ var HostedFields = require('./external/hosted-fields');
 var basicComponentVerification = require('../lib/basic-component-verification');
 var errors = require('./shared/errors');
 var supportsInputFormatting = require('restricted-input/supports-input-formatting');
-var wrapPromise = require('@braintree/wrap-promise');
 var BraintreeError = require('../lib/braintree-error');
-var Promise = require('../lib/promise');
 var VERSION = process.env.npm_package_version;
 
 /**
@@ -290,7 +288,7 @@ module.exports = {
    * }, callback);
    */
   supportsInputFormatting: supportsInputFormatting,
-  create: wrapPromise(create),
+  create: create,
   /**
    * @description The current version of the SDK, i.e. `{@pkg version}`.
    * @type {string}

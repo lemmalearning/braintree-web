@@ -9,13 +9,11 @@ var iFramer = require('@braintree/iframer');
 var uuid = require('../../lib/vendor/uuid');
 var useMin = require('../../lib/use-min');
 var methods = require('../../lib/methods');
-var Promise = require('../../lib/promise');
 var EventEmitter = require('../../lib/event-emitter');
 var BraintreeError = require('../../lib/braintree-error');
 var VERSION = process.env.npm_package_version;
 var events = require('../shared/constants').events;
 var errors = require('../shared/constants').errors;
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @typedef {object} PaymentRequestComponent~tokenizePayload
@@ -529,4 +527,4 @@ PaymentRequestComponent.prototype.teardown = function () {
   return Promise.resolve();
 };
 
-module.exports = wrapPromise.wrapPrototype(PaymentRequestComponent);
+module.exports = PaymentRequestComponent;

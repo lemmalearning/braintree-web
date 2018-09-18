@@ -4,10 +4,8 @@
 var analytics = require('../lib/analytics');
 var basicComponentVerification = require('../lib/basic-component-verification');
 var errors = require('./shared/errors');
-var wrapPromise = require('@braintree/wrap-promise');
 var BraintreeError = require('../lib/braintree-error');
 var Venmo = require('./venmo');
-var Promise = require('../lib/promise');
 var supportsVenmo = require('./shared/supports-venmo');
 var VERSION = process.env.npm_package_version;
 
@@ -75,7 +73,7 @@ function isBrowserSupported(options) {
 }
 
 module.exports = {
-  create: wrapPromise(create),
+  create: create,
   isBrowserSupported: isBrowserSupported,
   /**
    * @description The current version of the SDK, i.e. `{@pkg version}`.

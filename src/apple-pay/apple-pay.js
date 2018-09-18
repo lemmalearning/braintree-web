@@ -3,10 +3,8 @@
 var BraintreeError = require('../lib/braintree-error');
 var analytics = require('../lib/analytics');
 var errors = require('./errors');
-var Promise = require('../lib/promise');
 var methods = require('../lib/methods');
 var convertMethodsToError = require('../lib/convert-methods-to-error');
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @typedef {object} ApplePay~tokenizePayload
@@ -306,4 +304,4 @@ ApplePay.prototype.teardown = function () {
   return Promise.resolve();
 };
 
-module.exports = wrapPromise.wrapPrototype(ApplePay);
+module.exports = ApplePay;

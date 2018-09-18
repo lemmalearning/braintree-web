@@ -1,6 +1,5 @@
 'use strict';
 
-var Promise = require('../lib/promise');
 var constants = require('./constants');
 
 function setup() {

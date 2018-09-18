@@ -12,8 +12,6 @@ var iFramer = require('@braintree/iframer');
 var methods = require('../../lib/methods');
 var VERSION = process.env.npm_package_version;
 var uuid = require('../../lib/vendor/uuid');
-var Promise = require('../../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @class
@@ -90,7 +88,7 @@ UnionPay.prototype.fetchCapabilities = function (options) {
     }
 
     return new Promise(function (resolve, reject) {
-      self._initializeHostedFields(function () {
+      self._initializeHostedFields().then(function () {
         self._bus.emit(events.HOSTED_FIELDS_FETCH_CAPABILITIES, {hostedFields: hostedFields}, function (response) {
           if (response.err) {
             reject(new BraintreeError(response.err));
@@ -151,7 +149,7 @@ UnionPay.prototype.enroll = function (options) {
     }
 
     return new Promise(function (resolve, reject) {
-      self._initializeHostedFields(function () {
+      self._initializeHostedFields().then(function () {
         self._bus.emit(events.HOSTED_FIELDS_ENROLL, {hostedFields: hostedFields, mobile: mobile}, function (response) {
           if (response.err) {
             reject(new BraintreeError(response.err));
@@ -319,7 +317,7 @@ UnionPay.prototype.tokenize = function (options) {
     }
 
     return new Promise(function (resolve, reject) {
-      self._initializeHostedFields(function () {
+      self._initializeHostedFields().then(function () {
         self._bus.emit(events.HOSTED_FIELDS_TOKENIZE, options, function (response) {
           if (response.err) {
             reject(new BraintreeError(response.err));
@@ -355,14 +353,12 @@ UnionPay.prototype.teardown = function () {
   return Promise.resolve();
 };
 
-UnionPay.prototype._initializeHostedFields = function (callback) {
+UnionPay.prototype._initializeHostedFields = function () {
   var assetsUrl, isDebug;
   var componentId = uuid();
 
   if (this._bus) {
-    callback();
-
-    return;
+    return Promise.resolve();
   }
 
   assetsUrl = this._options.client.getConfiguration().gatewayConfiguration.assetsUrl;
@@ -379,13 +375,17 @@ UnionPay.prototype._initializeHostedFields = function (callback) {
     width: 0
   });
 
-  this._bus.on(Bus.events.CONFIGURATION_REQUEST, function (reply) {
-    reply(this._options.client);
+  var p = new Promise(function(resolve, reject) {
+    this._bus.on(Bus.events.CONFIGURATION_REQUEST, function (reply) {
+      reply(this._options.client);
 
-    callback();
+      resolve();
+    }.bind(this));
   }.bind(this));
 
   document.body.appendChild(this._hostedFieldsFrame);
+
+  return p;
 };
 
-module.exports = wrapPromise.wrapPrototype(UnionPay);
+module.exports = UnionPay;

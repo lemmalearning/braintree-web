@@ -19,12 +19,10 @@
     "@braintree/browser-detection": "1.7.0",
     "@braintree/iframer": "1.0.3",
     "@braintree/sanitize-url": "2.1.0",
-    "@braintree/wrap-promise": "1.1.1",
     "card-validator": "5.0.0",
     "credit-card-type": "7.1.0",
     "framebus": "3.0.1",
     "inject-stylesheet": "1.0.0",
-    "promise-polyfill": "8.0.0",
     "restricted-input": "1.2.7"
   },
   "devDependencies": {

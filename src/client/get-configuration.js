@@ -1,8 +1,6 @@
 'use strict';
 
 var BraintreeError = require('../lib/braintree-error');
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 var request = require('./request');
 var uuid = require('../lib/vendor/uuid');
 var constants = require('../lib/constants');
@@ -95,5 +93,5 @@ function getConfiguration(options) {
 }
 
 module.exports = {
-  getConfiguration: wrapPromise(getConfiguration)
+  getConfiguration: getConfiguration
 };

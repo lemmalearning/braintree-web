@@ -14,8 +14,6 @@ var deferred = require('../../lib/deferred');
 var errors = require('../shared/errors');
 var convertMethodsToError = require('../../lib/convert-methods-to-error');
 var querystring = require('../../lib/querystring');
-var Promise = require('../../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @typedef {object} PayPal~tokenizePayload
@@ -581,7 +579,7 @@ PayPal.prototype.focusWindow = function () {
  * });
  * @returns {Promise|void} Returns a promise if no callback is provided.
  */
-PayPal.prototype.teardown = wrapPromise(function () {
+PayPal.prototype.teardown = function () {
   var self = this; // eslint-disable-line no-invalid-this
 
   self._frameService.teardown();
@@ -591,6 +589,6 @@ PayPal.prototype.teardown = wrapPromise(function () {
   analytics.sendEvent(self._client, 'paypal.teardown-completed');
 
   return Promise.resolve();
-});
+}
 
 module.exports = PayPal;

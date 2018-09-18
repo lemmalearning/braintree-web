@@ -8,8 +8,6 @@ var basicComponentVerification = require('../lib/basic-component-verification');
 var methods = require('../lib/methods');
 var convertMethodsToError = require('../lib/convert-methods-to-error');
 var VERSION = process.env.npm_package_version;
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 var errors = require('./errors');
 
 /**
@@ -127,7 +125,7 @@ function create(options) {
 }
 
 function createTeardownMethod(result, instances) {
-  return wrapPromise(function teardown() {
+  return function teardown() {
     return new Promise(function (resolve) {
       instances.forEach(function (instance) {
         if (instance) {
@@ -139,11 +137,11 @@ function createTeardownMethod(result, instances) {
 
       resolve();
     });
-  });
+  };
 }
 
 module.exports = {
-  create: wrapPromise(create),
+  create: create,
   /**
    * @description The current version of the SDK, i.e. `{@pkg version}`.
    * @type {string}

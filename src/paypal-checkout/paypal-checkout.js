@@ -1,8 +1,6 @@
 'use strict';
 
 var analytics = require('../lib/analytics');
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 var BraintreeError = require('../lib/braintree-error');
 var convertToBraintreeError = require('../lib/convert-to-braintree-error');
 var errors = require('./errors');
@@ -445,4 +443,4 @@ PayPalCheckout.prototype.teardown = function () {
   return Promise.resolve();
 };
 
-module.exports = wrapPromise.wrapPrototype(PayPalCheckout);
+module.exports = PayPalCheckout;

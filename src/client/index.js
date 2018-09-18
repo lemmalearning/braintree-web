@@ -4,8 +4,6 @@ var BraintreeError = require('../lib/braintree-error');
 var Client = require('./client');
 var getConfiguration = require('./get-configuration').getConfiguration;
 var VERSION = process.env.npm_package_version;
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 var sharedErrors = require('../lib/errors');
 
 var cachedClients = {};
@@ -63,7 +61,7 @@ function clearCache() {
 }
 
 module.exports = {
-  create: wrapPromise(create),
+  create: create,
   /**
    * @description The current version of the SDK, i.e. `{@pkg version}`.
    * @type {string}

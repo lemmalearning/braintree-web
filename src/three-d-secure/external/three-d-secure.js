@@ -14,8 +14,6 @@ var errors = require('../shared/errors');
 var events = require('../shared/events');
 var VERSION = process.env.npm_package_version;
 var iFramer = require('@braintree/iframer');
-var Promise = require('../../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 
 var IFRAME_HEIGHT = 400;
 var IFRAME_WIDTH = 400;
@@ -378,4 +376,4 @@ ThreeDSecure.prototype.teardown = function () {
   return Promise.resolve();
 };
 
-module.exports = wrapPromise.wrapPrototype(ThreeDSecure);
+module.exports = ThreeDSecure;

@@ -24,8 +24,6 @@ var convertMethodsToError = require('../../lib/convert-methods-to-error');
 var sharedErrors = require('../../lib/errors');
 var getCardTypes = require('../shared/get-card-types');
 var attributeValidationError = require('./attribute-validation-error');
-var Promise = require('../../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @typedef {object} HostedFields~tokenizePayload
@@ -1094,4 +1092,4 @@ HostedFields.prototype.getState = function () {
   return this._state;
 };
 
-module.exports = wrapPromise.wrapPrototype(HostedFields);
+module.exports = HostedFields;

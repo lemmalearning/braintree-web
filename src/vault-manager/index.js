@@ -7,7 +7,6 @@
 var basicComponentVerification = require('../lib/basic-component-verification');
 var VaultManager = require('./vault-manager');
 var VERSION = process.env.npm_package_version;
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @static
@@ -27,7 +26,7 @@ function create(options) {
 }
 
 module.exports = {
-  create: wrapPromise(create),
+  create: create,
   /**
    * @description The current version of the SDK, i.e. `{@pkg version}`.
    * @type {string}

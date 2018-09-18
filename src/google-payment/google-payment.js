@@ -7,8 +7,6 @@ var generateGooglePayConfiguration = require('../lib/generate-google-pay-configu
 var BraintreeError = require('../lib/braintree-error');
 var errors = require('./errors');
 var methods = require('../lib/methods');
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @typedef {object} GooglePayment~tokenizePayload
@@ -173,4 +171,4 @@ GooglePayment.prototype.teardown = function () {
   return Promise.resolve();
 };
 
-module.exports = wrapPromise.wrapPrototype(GooglePayment);
+module.exports = GooglePayment;

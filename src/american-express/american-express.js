@@ -3,10 +3,8 @@
 var BraintreeError = require('../lib/braintree-error');
 var errors = require('./errors');
 var assign = require('../lib/assign').assign;
-var Promise = require('../lib/promise');
 var methods = require('../lib/methods');
 var convertMethodsToError = require('../lib/convert-methods-to-error');
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @class
@@ -143,4 +141,4 @@ AmericanExpress.prototype.teardown = function () {
   return Promise.resolve();
 };
 
-module.exports = wrapPromise.wrapPrototype(AmericanExpress);
+module.exports = AmericanExpress;

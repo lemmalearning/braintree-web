@@ -9,8 +9,6 @@ var browserDetection = require('./shared/browser-detection');
 var Masterpass = require('./external/masterpass');
 var VERSION = process.env.npm_package_version;
 var errors = require('./shared/errors');
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 
 /**
  * @static
@@ -72,7 +70,7 @@ function isSupported() {
 }
 
 module.exports = {
-  create: wrapPromise(create),
+  create: create,
   isSupported: isSupported,
   /**
    * @description The current version of the SDK, i.e. `{@pkg version}`.

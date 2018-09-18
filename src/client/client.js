@@ -9,8 +9,6 @@ var BraintreeError = require('../lib/braintree-error');
 var convertToBraintreeError = require('../lib/convert-to-braintree-error');
 var createAuthorizationData = require('../lib/create-authorization-data');
 var addMetadata = require('../lib/add-metadata');
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 var once = require('../lib/once');
 var deferred = require('../lib/deferred');
 var assign = require('../lib/assign').assign;
@@ -377,7 +375,7 @@ Client.prototype.getVersion = function () {
  * });
  * @returns {Promise|void} Returns a promise if no callback is provided.
  */
-Client.prototype.teardown = wrapPromise(function () {
+Client.prototype.teardown = function () {
   var self = this; // eslint-disable-line no-invalid-this
 
   self._activeCache = false;
@@ -385,7 +383,7 @@ Client.prototype.teardown = wrapPromise(function () {
   convertMethodsToError(self, methods(Client.prototype));
 
   return Promise.resolve();
-});
+}
 
 function getAuthorizationHeadersForGraphQL(authorization) {
   var authAttrs = createAuthorizationData(authorization).attrs;

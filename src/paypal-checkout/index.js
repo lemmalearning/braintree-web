@@ -8,8 +8,6 @@ var BraintreeError = require('../lib/braintree-error');
 var analytics = require('../lib/analytics');
 var basicComponentVerification = require('../lib/basic-component-verification');
 var errors = require('./errors');
-var Promise = require('../lib/promise');
-var wrapPromise = require('@braintree/wrap-promise');
 var PayPalCheckout = require('./paypal-checkout');
 var VERSION = process.env.npm_package_version;
 
@@ -68,7 +66,7 @@ function isSupported() {
 }
 
 module.exports = {
-  create: wrapPromise(create),
+  create: create,
   isSupported: isSupported,
   /**
    * @description The current version of the SDK, i.e. `{@pkg version}`.
